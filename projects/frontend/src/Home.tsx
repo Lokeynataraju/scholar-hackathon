@@ -49,9 +49,8 @@ const Home: React.FC<HomeProps> = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
   }
 
-  const toggleWalletModal = () => {
-    setOpenWalletModal(!openWalletModal)
-  }
+  const openModal = () => setOpenWalletModal(true)
+  const closeModal = () => setOpenWalletModal(false)
 
   useEffect(() => {
     const initClient = async () => {
@@ -126,7 +125,7 @@ const Home: React.FC<HomeProps> = () => {
               ? 'bg-base-200 text-base-content hover:bg-base-300'
               : 'bg-primary text-primary-content hover:shadow-lg hover:shadow-primary/30 hover:scale-105'
               }`}
-            onClick={toggleWalletModal}
+            onClick={openModal}
           >
             {activeAddress ? (
               <span className="flex items-center gap-2">
@@ -140,7 +139,7 @@ const Home: React.FC<HomeProps> = () => {
 
       {/* ── Main Content ───────────────────────────────────────────── */}
       <div className="pt-24 pb-20 min-h-screen">
-        <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
+        <ConnectWallet openModal={openWalletModal} closeModal={closeModal} />
 
         {!appClient ? (
           <div className="flex flex-col items-center justify-center h-[80vh]">
@@ -182,7 +181,7 @@ const Home: React.FC<HomeProps> = () => {
                       <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
                         <button
                           className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white border-0 rounded-2xl px-12 font-bold shadow-xl shadow-blue-900/50 hover:scale-105 transition-all"
-                          onClick={toggleWalletModal}
+                          onClick={openModal}
                         >
                           Get Started for Free
                         </button>
