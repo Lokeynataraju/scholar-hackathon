@@ -26,9 +26,9 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
   ]
 } else {
   supportedWallets = [
+    { id: WalletId.MNEMONIC },
     { id: WalletId.PERA },
     { id: WalletId.DEFLY },
-    { id: WalletId.MNEMONIC },
   ]
 }
 

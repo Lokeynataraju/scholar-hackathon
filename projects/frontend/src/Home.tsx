@@ -90,7 +90,8 @@ const Home: React.FC<HomeProps> = () => {
     }
 
     initClient()
-  }, [activeAddress, transactionSigner])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeAddress])
 
   return (
     <div className="min-h-screen bg-base-200 font-sans text-base-content selection:bg-blue-100 selection:text-blue-900 transition-colors duration-300">
