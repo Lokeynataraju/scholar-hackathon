@@ -1,0 +1,143 @@
+﻿npx : C:\Users\Akas
+h\AppData\Local\npm
+-cache\_npx\1bf7c3c
+15bf47d04\node_modu
+les\ts-node\src\ind
+ex.ts:859
+At line:1 char:1
++ npx ts-node 
+--project 
+tsconfig.json scrip
+ts/deploy-localnet.
+ts 2>&1 | ...
++ ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo 
+             : No  
+  tSpecified: (C   
+ :\Users\Akash\    
+...rc\index.ts    
+:859:String) [    
+], RemoteExcep    
+tion
+    + FullyQualifi 
+   edErrorId : Na  
+  tiveCommandErr   
+ or
+ 
+    return new TSEr
+ror(diagnosticText,
+ diagnosticCodes, 
+diagnostics);
+           ^
+TSError: Γ¿» 
+Unable to compile 
+TypeScript:
+scripts/deploy-loca
+lnet.ts(11,13): 
+error TS2322: Type 
+'{ server: string; 
+port: number; 
+token: string; 
+network: string; 
+}' is not 
+assignable to type 
+'AlgoClientConfig'.
+  Object literal 
+may only specify 
+known properties, 
+and 'network' does 
+not exist in type 
+'AlgoClientConfig'.
+scripts/deploy-loca
+lnet.ts(22,64): 
+error TS2345: 
+Argument of type 'T
+ransactionSignerAcc
+ount & { account: 
+SigningAccount; }' 
+is not assignable 
+to parameter of 
+type 'string'.
+scripts/deploy-loca
+lnet.ts(28,9): 
+error TS2322: Type 
+'TransactionSignerA
+ccount & { 
+account: 
+SigningAccount; }' 
+is not assignable 
+to type 'string | 
+undefined'.
+
+    at 
+createTSError (C:\U
+sers\Akash\AppData\
+Local\npm-cache\_np
+x\1bf7c3c15bf47d04\
+node_modules\ts-nod
+e\src\index.ts:859:
+12)
+    at 
+reportTSError (C:\U
+sers\Akash\AppData\
+Local\npm-cache\_np
+x\1bf7c3c15bf47d04\
+node_modules\ts-nod
+e\src\index.ts:863:
+19)
+    at getOutput (C
+:\Users\Akash\AppDa
+ta\Local\npm-cache\
+_npx\1bf7c3c15bf47d
+04\node_modules\ts-
+node\src\index.ts:1
+077:36)
+    at 
+Object.compile (C:\
+Users\Akash\AppData
+\Local\npm-cache\_n
+px\1bf7c3c15bf47d04
+\node_modules\ts-no
+de\src\index.ts:143
+3:41)
+    at 
+Module.m._compile (
+C:\Users\Akash\AppD
+ata\Local\npm-cache
+\_npx\1bf7c3c15bf47
+d04\node_modules\ts
+-node\src\index.ts:
+1617:30)
+    at Module._exte
+nsions..js (node:in
+ternal/modules/cjs/
+loader:1295:10)
+    at Object.requi
+re.extensions.<comp
+uted> [as .ts] (C:\
+Users\Akash\AppData
+\Local\npm-cache\_n
+px\1bf7c3c15bf47d04
+\node_modules\ts-no
+de\src\index.ts:162
+1:12)
+    at Module.load 
+(node:internal/modu
+les/cjs/loader:1091
+:32)
+    at Function.Mod
+ule._load (node:int
+ernal/modules/cjs/l
+oader:938:12)
+    at Function.exe
+cuteUserEntryPoint 
+[as runMain] (node:
+internal/modules/ru
+n_main:83:12) {
+  diagnosticCodes: 
+[ 2322, 2345, 2322 
+]
+}

@@ -1,0 +1,36 @@
+﻿Using account: DXVYGGF5WXPP3HS6FSG53SWRVNBTMT6SFDPIOIWXMWEGAEEO73G7YF6ZC4
+Deploying ScholarSBT to LocalNet...
+npx : Deployment 
+failed: Didn't 
+receive an indexer 
+client when this 
+AppManager was 
+created, but also 
+didn't receive an e
+xistingDeployments 
+cache - one of 
+them must be 
+provided
+At line:1 char:1
++ npx ts-node 
+--project 
+tsconfig.json scrip
+ts/deploy-localnet.
+ts 2>&1 | ...
++ ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo 
+             : No  
+  tSpecified: (D   
+ eployment fail    
+...ust be prov    
+ided:String) [    
+], RemoteExcep    
+tion
+    + FullyQualifi 
+   edErrorId : Na  
+  tiveCommandErr   
+ or
+ 

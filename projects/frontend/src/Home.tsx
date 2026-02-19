@@ -60,57 +60,94 @@ const Home: React.FC<HomeProps> = () => {
   }, [activeAddress, transactionSigner])
 
   return (
-    <div className="min-h-screen bg-base-200">
-      <div className="navbar bg-base-100 shadow-lg px-4">
+    <div className="min-h-screen bg-base-200 font-sans">
+      {/* Navbar */}
+      <div className="navbar bg-base-100 shadow-md px-4 sm:px-8">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl text-primary font-bold">PW Scholar-SBT</a>
+          <a className="btn btn-ghost normal-case text-2xl text-primary font-bold gap-2">
+            <span className="text-3xl">🎓</span> PW Scholar
+          </a>
         </div>
-        <div className="flex-none gap-2">
-          <ul className="menu menu-horizontal px-1">
-            <li><a onClick={() => setActiveTab('student')} className={activeTab === 'student' ? 'active' : ''}>Student</a></li>
-            <li><a onClick={() => setActiveTab('verify')} className={activeTab === 'verify' ? 'active' : ''}>Verify</a></li>
+        <div className="flex-none gap-4">
+          <ul className="menu menu-horizontal px-1 bg-base-200 rounded-box hidden sm:flex">
+            <li><a onClick={() => setActiveTab('student')} className={activeTab === 'student' ? 'active font-bold' : ''}>Student Dashboard</a></li>
+            <li><a onClick={() => setActiveTab('verify')} className={activeTab === 'verify' ? 'active font-bold' : ''}>Verify Credentials</a></li>
             {activeAddress === adminAddress && (
-              <li><a onClick={() => setActiveTab('admin')} className={activeTab === 'admin' ? 'active' : ''}>Admin</a></li>
+              <li><a onClick={() => setActiveTab('admin')} className={`text-error ${activeTab === 'admin' ? 'active font-bold' : ''}`}>Admin Panel</a></li>
             )}
           </ul>
-          <button className="btn btn-outline" onClick={toggleWalletModal}>
-            {activeAddress ? `${activeAddress.slice(0, 6)}...${activeAddress.slice(-4)}` : 'Connect Wallet'}
+          <div className="dropdown dropdown-end sm:hidden">
+            <label tabIndex={0} className="btn btn-ghost btn-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+            </label>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a onClick={() => setActiveTab('student')}>Student</a></li>
+              <li><a onClick={() => setActiveTab('verify')}>Verify</a></li>
+              {activeAddress === adminAddress && <li><a onClick={() => setActiveTab('admin')}>Admin</a></li>}
+            </ul>
+          </div>
+          <button
+            className={`btn ${activeAddress ? 'btn-success text-white' : 'btn-primary'}`}
+            onClick={toggleWalletModal}
+          >
+            {activeAddress ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                {activeAddress.slice(0, 4)}...{activeAddress.slice(-4)}
+              </>
+            ) : 'Connect Wallet'}
           </button>
         </div>
       </div>
 
-      <div className="container mx-auto p-4 max-w-4xl">
+      {/* Main Content */}
+      <div className="container mx-auto p-4 max-w-5xl py-10">
         <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
 
-        <div className="content mt-6">
-          {!appClient ? (
-            <div className="text-center mt-10">Loading Contract...</div>
-          ) : (
-            <>
-              {activeTab === 'student' && (
-                activeAddress ? (
-                  <StudentPanel appClient={appClient} activeAddress={activeAddress} />
-                ) : (
-                  <div className="alert alert-warning shadow-lg">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                      <span>Please connect your wallet to access the Student Dashboard.</span>
+        {!appClient ? (
+          <div className="flex flex-col items-center justify-center h-64">
+            <span className="loading loading-spinner loading-lg text-primary"></span>
+            <p className="mt-4 text-base-content/70">Connecting to Algorand...</p>
+          </div>
+        ) : (
+          <div className="fade-in">
+            {activeTab === 'student' && (
+              activeAddress ? (
+                <StudentPanel appClient={appClient} activeAddress={activeAddress} />
+              ) : (
+                <div className="hero min-h-[60vh] bg-base-100 rounded-3xl shadow-xl overflow-hidden">
+                  <div className="hero-content text-center">
+                    <div className="max-w-md">
+                      <h1 className="text-5xl font-bold text-primary">Your Academic Identity</h1>
+                      <p className="py-6 text-lg">
+                        Secure, verifiable, and permanent. Claim your Scholar Soulbound Tokens (SBTs) on the Algorand blockchain.
+                      </p>
+                      <button className="btn btn-primary btn-lg shadow-lg hover:scale-105 transition-transform" onClick={toggleWalletModal}>
+                        Connect Wallet to Start
+                      </button>
                     </div>
                   </div>
-                )
-              )}
+                </div>
+              )
+            )}
 
-              {activeTab === 'admin' && (
-                <AdminPanel appClient={appClient} adminAddress={adminAddress} activeAddress={activeAddress || ''} />
-              )}
+            {activeTab === 'admin' && (
+              <AdminPanel appClient={appClient} adminAddress={adminAddress} activeAddress={activeAddress || ''} />
+            )}
 
-              {activeTab === 'verify' && (
-                <VerifyPage appClient={appClient} />
-              )}
-            </>
-          )}
-        </div>
+            {activeTab === 'verify' && (
+              <VerifyPage appClient={appClient} />
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Footer */}
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content rounded-t-lg mt-10">
+        <aside>
+          <p>Built for RIFT 2026 Hackathon • Powered by Algorand</p>
+        </aside>
+      </footer>
     </div>
   )
 }

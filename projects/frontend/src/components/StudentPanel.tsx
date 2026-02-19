@@ -18,9 +18,8 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress })
             const result = await appClient.send.getScholarBadges({
                 args: { student: activeAddress }
             })
-            // Result return should be [bigint, bigint, ...] (16 elements fixed)
-            // We filter out 0s
             if (result.return) {
+                // Filter out 0s (empty slots in static array)
                 const badges = result.return.filter((id) => id > 0n)
                 setMyBadges(badges)
             }
@@ -45,11 +44,10 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress })
         try {
             await appClient.send.claimScholarSbt({
                 args: { milestoneId: BigInt(milestoneId) },
-                // sender: { signer, addr } handled by AppClient if initialized correctly
             })
             enqueueSnackbar('Badge claimed successfully!', { variant: 'success' })
             setMilestoneId('')
-            fetchBadges() // Refresh list
+            fetchBadges()
         } catch (e: any) {
             console.error(e)
             enqueueSnackbar(`Error: ${e.message}`, { variant: 'error' })
@@ -59,45 +57,91 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress })
     }
 
     return (
-        <div className="card bg-base-100 shadow-xl mt-4">
-            <div className="card-body">
-                <h2 className="card-title">Student Dashboard</h2>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Claim a Badge (Enter Milestone ID)</span>
-                    </label>
-                    <div className="input-group">
-                        <input
-                            type="number"
-                            placeholder="e.g. 1"
-                            className="input input-bordered w-full"
-                            value={milestoneId}
-                            onChange={(e) => setMilestoneId(e.target.value)}
-                        />
-                        <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={handleClaim} disabled={loading}>
-                            Claim
-                        </button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Left Column: Profile & Claim */}
+            <div className="md:col-span-1 space-y-6">
+                {/* Profile Card */}
+                <div className="card bg-base-100 shadow-xl border-t-4 border-primary">
+                    <div className="card-body">
+                        <h2 className="card-title text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            My Profile
+                        </h2>
+                        <div className="text-sm opacity-70 mt-2">Wallet Address</div>
+                        <div className="badge badge-ghost p-3 font-mono text-xs break-all h-auto">
+                            {activeAddress}
+                        </div>
+                        <div className="stat-value text-2xl mt-4">{myBadges.length}</div>
+                        <div className="stat-desc">Total Badges Earned</div>
                     </div>
                 </div>
 
-                <div className="divider"></div>
-
-                <h3 className="text-lg font-bold">My Scholar SBTs</h3>
-                {myBadges.length === 0 ? (
-                    <p className="text-gray-500">No badges earned yet.</p>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                        {myBadges.map((badgeId) => (
-                            <div key={badgeId.toString()} className="alert alert-success shadow-lg">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                    <span>Milestone ID: {badgeId.toString()}</span>
-                                </div>
-                            </div>
-                        ))}
+                {/* Claim Card */}
+                <div className="card bg-base-100 shadow-xl">
+                    <div className="card-body">
+                        <h2 className="card-title text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+                            Claim New Badge
+                        </h2>
+                        <p className="text-sm opacity-70">Enter the Milestone ID provided by your instructor.</p>
+                        <div className="join w-full mt-4">
+                            <input
+                                type="number"
+                                placeholder="ID (e.g. 1)"
+                                className="input input-bordered input-secondary join-item w-full"
+                                value={milestoneId}
+                                onChange={(e) => setMilestoneId(e.target.value)}
+                            />
+                            <button
+                                className={`btn btn-secondary join-item ${loading ? 'loading' : ''}`}
+                                onClick={handleClaim}
+                                disabled={loading}
+                            >
+                                {loading ? '' : 'Claim'}
+                            </button>
+                        </div>
                     </div>
-                )}
+                </div>
+            </div>
+
+            {/* Right Column: Badges Grid */}
+            <div className="md:col-span-2">
+                <div className="card bg-base-100 shadow-xl min-h-[400px]">
+                    <div className="card-body">
+                        <h2 className="card-title text-2xl mb-6">
+                            <span className="text-3xl">🏆</span> My Achievements
+                        </h2>
+
+                        {myBadges.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center h-64 opacity-50 border-2 border-dashed rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                                <p>No badges earned yet.</p>
+                                <p className="text-sm">Claim your first badge to see it here!</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {myBadges.map((badgeId) => (
+                                    <div key={badgeId.toString()} className="card bg-base-200 border border-base-300 hover:shadow-md transition-shadow">
+                                        <div className="card-body flex flex-row items-center gap-4 p-4">
+                                            <div className="avatar placeholder">
+                                                <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+                                                    <span className="text-xl">🎓</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold">Scholar SBT #{badgeId.toString()}</h3>
+                                                <div className="badge badge-success badge-sm gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-3 h-3 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                                                    Verified
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     )
