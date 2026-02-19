@@ -10,15 +10,17 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
   const { wallets, activeAddress } = useWallet()
   const [copied, setCopied] = useState(false)
   const prevAddressRef = useRef<string | null>(null)
+  // Store closeModal in a ref so useEffect doesn't re-run when the function reference changes
+  const closeModalRef = useRef(closeModal)
+  useEffect(() => { closeModalRef.current = closeModal }, [closeModal])
 
   // Auto-close modal when wallet connects (Pera QR scan completes)
   useEffect(() => {
     if (activeAddress && !prevAddressRef.current && openModal) {
-      // Just went from disconnected → connected while modal is open
-      setTimeout(() => closeModal(), 600) // slight delay so user sees the "Connected" flash
+      setTimeout(() => closeModalRef.current(), 600)
     }
     prevAddressRef.current = activeAddress
-  }, [activeAddress, openModal, closeModal])
+  }, [activeAddress, openModal]) // closeModal intentionally omitted — using ref above
 
   const isKmd = (wallet: Wallet) => wallet.id === WalletId.KMD
   const isMnemonic = (wallet: Wallet) => wallet.id === WalletId.MNEMONIC
@@ -126,13 +128,12 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
                 return (
                   <button
                     key={`provider-${wallet.id}`}
-                    onClick={async () => {
+                    onClick={() => {
                       if (isPera || isDefly) {
-                        // For WalletConnect v2 (PERA2):
-                        // Call connect() FIRST so the WC modal mounts to document.body
-                        // Then close our <dialog> — WC v2 renders outside the dialog DOM
-                        wallet.connect().catch(e => console.warn('Wallet connect error:', e))
-                        setTimeout(() => closeModal(), 100)
+                        // Close dialog first (it traps z-index otherwise)
+                        // Then fire connect after a short delay
+                        closeModal()
+                        setTimeout(() => wallet.connect(), 400)
                       } else {
                         wallet.connect()
                         closeModal()

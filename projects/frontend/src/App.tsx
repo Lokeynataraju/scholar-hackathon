@@ -26,13 +26,7 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
   ]
 } else {
   supportedWallets = [
-    {
-      id: WalletId.PERA2,
-      options: {
-        projectId: '79c2d5484106868e03ed614089634500',
-        chainId: 416002, // Algorand Testnet
-      },
-    },
+    { id: WalletId.PERA },
     { id: WalletId.DEFLY },
     { id: WalletId.MNEMONIC },
   ]
