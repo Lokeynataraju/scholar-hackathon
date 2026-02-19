@@ -154,16 +154,20 @@ const Home: React.FC<HomeProps> = () => {
         // ── DASHBOARD LAYOUT (Connected State) ───────────────────────────
         <div className="flex h-screen overflow-hidden bg-slate-900">
           {/* 1. Sidebar */}
-          <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+          <div className="print:hidden">
+            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+          </div>
 
           {/* Main Content Shell */}
-          <div className="flex-1 flex flex-col ml-64 transition-all duration-300 relative">
+          <div className="flex-1 flex flex-col ml-64 print:ml-0 transition-all duration-300 relative">
             {/* 2. Header */}
-            <DashboardHeader
-              title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-              activeAddress={activeAddress}
-              openWalletModal={openModal}
-            />
+            <div className="print:hidden">
+              <DashboardHeader
+                title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+                activeAddress={activeAddress}
+                openWalletModal={openModal}
+              />
+            </div>
 
             {/* 3. Main Scrollable Content */}
             <main className="flex-1 overflow-y-auto bg-slate-900 p-6 md:p-8 relative scroll-smooth no-scrollbar">

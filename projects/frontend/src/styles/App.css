@@ -75,3 +75,42 @@
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(37,99,235,.15);
 }
+
+@media print {
+  body, #root, .min-h-screen, .bg-slate-900, main {
+    background-color: white !important;
+    color: black !important;
+  }
+  .navbar, .sidebar, .btn, .input, .drawer-side, .toast, .loading, .alert {
+    display: none !important;
+  }
+  /* Hide specific UI noise */
+  .animate-pulse, .animate-fade-in, .animate-fade-in-up {
+    animation: none !important;
+  }
+  /* Fix Layout */
+  .min-h-\[80vh\] {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  /* Cards to Print Friendly */
+  .bg-base-100, .bg-neutral, .card, .bg-blue-900\/20 {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
+  /* Text Colors */
+  .text-white, .text-slate-200, .text-base-content {
+    color: #000 !important;
+  }
+  /* Header adjustments */
+  h1, h2, h3, h4 {
+    color: #000 !important;
+  }
+  /* Hide Search Container */
+  .w-full.max-w-2xl.mx-auto {
+    display: none !important;
+  }
+}
