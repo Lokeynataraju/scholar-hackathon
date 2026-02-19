@@ -110,7 +110,13 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
         if (storedCompleted) setCompletedModules(JSON.parse(storedCompleted))
 
         const storedUnlocked = localStorage.getItem(`scholar_unlocked_${activeAddress}`)
-        if (storedUnlocked) setUnlockedCourses(JSON.parse(storedUnlocked))
+        if (storedUnlocked) {
+            try {
+                const parsed = JSON.parse(storedUnlocked)
+                if (Array.isArray(parsed)) setUnlockedCourses(parsed)
+                else setUnlockedCourses([])
+            } catch { setUnlockedCourses([]) }
+        }
     }, [activeAddress, demoMode, view])
 
     // Load watched modules from localStorage
