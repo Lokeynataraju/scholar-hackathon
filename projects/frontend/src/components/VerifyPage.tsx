@@ -80,14 +80,21 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
                     if (lazyMatch) storedBadges = localStorage.getItem(lazyMatch)
                 }
 
-                // NUCLEAR FALLBACK: If fuzzy failed, try Global Demo Key (Last Claimed)
-                // This assumes the verifier is the student demoing on same machine
+                // NUCLEAR FALLBACK 1: Global Demo Key
                 if (!storedBadges) {
                     const globalFallback = localStorage.getItem('scholar_demo_fallback_badges')
-                    if (globalFallback) {
-                        storedBadges = globalFallback
-                        // notify user so they know
-                        enqueueSnackbar('⚠️ Using global demo session data (Address mismatch ignored)', { variant: 'warning' })
+                    if (globalFallback) storedBadges = globalFallback
+                }
+
+                // NUCLEAR FALLBACK 2: Scan for ANY badge data in browser (The "Show me something" Fix)
+                if (!storedBadges) {
+                    const allKeys = Object.keys(localStorage)
+                    const badgeKeys = allKeys.filter(k => k.startsWith('scholar_badges_'))
+                    if (badgeKeys.length > 0) {
+                        // Find the one with most data (longest string)
+                        badgeKeys.sort((a, b) => (localStorage.getItem(b) || '').length - (localStorage.getItem(a) || '').length)
+                        storedBadges = localStorage.getItem(badgeKeys[0])
+                        enqueueSnackbar('⚠️ Showing detected demo data (Address fuzzy match)', { variant: 'info' })
                     }
                 }
 

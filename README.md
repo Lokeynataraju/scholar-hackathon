@@ -22,7 +22,7 @@ We address the critical issues of **Credential Fraud** and **Verification Ineffi
 
 **The Solution:** Scholar-SBT issues **Soulbound Tokens** on Algorand. These are permanent, tamper-proof, and instantly verifiable via QR Code.
 
-## ⭐ Key Features (Winning Factors)
+## ⭐ Key Features
 1.  **Smart "Proof of Watch"**: Students cannot just click "Claim". A smart timer ensures they watch the video content before the Mint button unlocks.
 2.  **Instant QR Verification**: Employers scan a QR code to see a **Dynamically Generated Student Profile** (Total Courses, Skill Level, Rank) fetched directly from the blockchain/local history.
 3.  **Token-Gated Masterclass (DeFi)**: A "Learn-to-Earn" economy. Students earn coins by learning, then SPEND those coins to unlock premium content (e.g., Data Structures Masterclass).
@@ -128,5 +128,4 @@ We built this together with equal passion and distinct expertise:
     *   Defined the **User Journey** and **Real-World Use Cases** (Zero-Knowledge verification).
     *   Managed the **Vercel Deployment Pipeline** and Quality Assurance testing.
 
----
-*Built for RIFT 2026 Hackathon | Powered by Algorand*
+
