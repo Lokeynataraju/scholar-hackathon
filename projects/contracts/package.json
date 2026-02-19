@@ -9,7 +9,9 @@
     "build": "npm run compile-contract && npm run generate-client",
     "test": "npm run build && jest",
     "lint": "eslint . --ext .ts",
-    "fix": "eslint . --ext .ts --fix"
+    "fix": "eslint . --ext .ts --fix",
+    "deploy:testnet": "npx ts-node --project tsconfig.json scripts/deploy-testnet.ts",
+    "deploy:localnet": "npx ts-node --project tsconfig.json scripts/deploy-localnet.ts"
   },
   "dependencies": {
     "@algorandfoundation/algokit-utils": "^7.0.0",

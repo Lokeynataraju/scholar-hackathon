@@ -12,4 +12,16 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      // Proxy Algorand API calls to bypass CORS
+      '/api/algorand': {
+        target: 'https://testnet-api.algonode.cloud',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/algorand/, ''),
+        secure: true,
+      },
+    },
+  },
 })
+

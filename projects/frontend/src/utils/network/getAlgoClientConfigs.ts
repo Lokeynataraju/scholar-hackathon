@@ -16,9 +16,17 @@ const TESTNET_INDEXER_DEFAULTS = {
 }
 
 export function getAlgodConfigFromViteEnvironment(): AlgoViteClientConfig {
+  let server = import.meta.env.VITE_ALGOD_SERVER ?? TESTNET_DEFAULTS.server
+  let port = import.meta.env.VITE_ALGOD_PORT ?? TESTNET_DEFAULTS.port
+
+  if (server.startsWith('/')) {
+    server = window.location.origin + server
+    port = ''
+  }
+
   return {
-    server: import.meta.env.VITE_ALGOD_SERVER ?? TESTNET_DEFAULTS.server,
-    port: import.meta.env.VITE_ALGOD_PORT ?? TESTNET_DEFAULTS.port,
+    server,
+    port,
     token: import.meta.env.VITE_ALGOD_TOKEN ?? TESTNET_DEFAULTS.token,
     network: import.meta.env.VITE_ALGOD_NETWORK ?? TESTNET_DEFAULTS.network,
   }

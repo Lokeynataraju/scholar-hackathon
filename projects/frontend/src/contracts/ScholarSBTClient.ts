@@ -20,8 +20,6 @@ import {
 } from '@algorandfoundation/algokit-utils/types/app-client'
 import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
-type RawSimulateOptions = SimulateOptions
-type SkipSignaturesSimulateOptions = SimulateOptions
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 import SimulateResponse = modelsv2.SimulateResponse
@@ -922,8 +920,8 @@ export type ScholarSbtComposer<TReturns extends [...any[]] = []> = {
    * Simulates the transaction group and returns the result
    */
   simulate(): Promise<ScholarSbtComposerResults<TReturns> & { simulateResponse: SimulateResponse }>
-  simulate(options: SkipSignaturesSimulateOptions): Promise<ScholarSbtComposerResults<TReturns> & { simulateResponse: SimulateResponse }>
-  simulate(options: RawSimulateOptions): Promise<ScholarSbtComposerResults<TReturns> & { simulateResponse: SimulateResponse }>
+  simulate(options: SimulateOptions): Promise<ScholarSbtComposerResults<TReturns> & { simulateResponse: SimulateResponse }>
+  simulate(options?: SimulateOptions): Promise<ScholarSbtComposerResults<TReturns> & { simulateResponse: SimulateResponse }>
   /**
    * Sends the transaction group to the network and returns the results
    */

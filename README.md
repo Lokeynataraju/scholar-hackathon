@@ -2,6 +2,23 @@
 
 **RIFT 2026 Hackathon - Build on Algorand Track**
 
+<!-- 
+🎬 DEMO VIDEO SCRIPT (FOR YOUR RECORDING):
+1. Intro: "Hi, I'm [Name]. I built PW Scholar-SBT for RIFT 2026 using Algorand."
+2. Problem: "Certificates are fakeable. We solve this with Soulbound Tokens."
+3. Admin Demo: 
+   - Open 'Admin Panel' (Localhost).
+   - Create a Milestone (e.g., 'Completion Certificate').
+4. Student Demo:
+   - Switch to 'Student Dashboard'.
+   - Enter ID and Claim Badge.
+   - Show 'My Profile' with the new badge.
+5. Verification:
+   - Go to 'Verify Credentials'.
+   - Paste address -> Show 'Verified' result.
+6. Outro: "Built with AlgoKit, React, and TEALScript. Thank you!"
+-->
+
 ## 🚀 Live Demo
 - **Frontend URL:** [https://scholar-hackathon.vercel.app](https://scholar-hackathon.vercel.app)
 - **LinkedIn Demo Video:** [LINK_TO_YOUR_LINKEDIN_VIDEO] (Your video MUST tag RIFT's official LinkedIn page: https://www.linkedin.com/company/rift-pwioi/)

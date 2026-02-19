@@ -75,11 +75,50 @@ export class ScholarSBT extends Contract {
     }
 
     /**
+     * Local State: Student's coin balance.
+     */
+    coins = LocalStateKey<uint64>();
+
+    /**
+     * Earn coins for completing an activity.
+     * In a production app, this would be restricted to admin or check a signature.
+     * For hackathon demo, student can call it (self-mint).
+     * @param amount Amount of coins to add
+     */
+    earnCoins(amount: uint64): void {
+        this.coins(this.txn.sender).value = this.coins(this.txn.sender).value + amount;
+    }
+
+    /**
+     * Redeem coins for a reward.
+     * @param rewardId ID of the item to redeem
+     * @param cost Cost in coins
+     */
+    redeemReward(rewardId: uint64, cost: uint64): void {
+        const balance = this.coins(this.txn.sender).value;
+        assert(balance >= cost);
+        this.coins(this.txn.sender).value = balance - cost;
+
+        // Emitting an event or logging could happen here. 
+        // For now, the deducted balance is proof enough.
+    }
+
+    /**
      * Read-only method to fetch student's earned SBTs.
      * @param student The address of the student to look up.
      * @returns The list of milestone IDs earned by the student.
      */
     getScholarBadges(student: Address): StaticArray<uint64, 16> {
         return this.claimedBadges(student).value;
+    }
+
+    /**
+     * Allow user to opt-in to the contract.
+     * Initializes their local state.
+     */
+    @allow.call('OptIn')
+    optIn(): void {
+        const empty: StaticArray<uint64, 16> = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.claimedBadges(this.txn.sender).value = empty;
     }
 }

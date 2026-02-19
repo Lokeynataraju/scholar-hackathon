@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ======================= ANIMATIONS =======================*/
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,.5); }
+  50%       { box-shadow: 0 0 0 10px rgba(37,99,235,0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ======================= UTILITIES =======================*/
+.animate-fade-in-up  { animation: fadeInUp .5s ease both; }
+.animate-fade-in     { animation: fadeIn   .4s ease both; }
+.animate-float       { animation: float 3s ease-in-out infinite; }
+
+/* Staggered cards */
+.card-stagger > *:nth-child(1) { animation: fadeInUp .4s .05s ease both; }
+.card-stagger > *:nth-child(2) { animation: fadeInUp .4s .15s ease both; }
+.card-stagger > *:nth-child(3) { animation: fadeInUp .4s .25s ease both; }
+.card-stagger > *:nth-child(4) { animation: fadeInUp .4s .35s ease both; }
+
+/* Shimmer text */
+.shimmer-text {
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 40%, #2563eb 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Badge glow */
+.badge-glow {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Gradient hero text */
+.gradient-text {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card hover lift */
+.hover-lift {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(37,99,235,.15);
+}
