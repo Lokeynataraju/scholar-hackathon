@@ -1,4 +1,4 @@
-import { SupportedWallet, WalletId, WalletManager, WalletProvider } from '@txnlab/use-wallet-react'
+import { NetworkId, SupportedWallet, WalletId, WalletManager, WalletProvider } from '@txnlab/use-wallet-react'
 import { SnackbarProvider } from 'notistack'
 import Home from './Home'
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
@@ -21,8 +21,6 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
     { id: WalletId.DEFLY },
     { id: WalletId.PERA },
     { id: WalletId.EXODUS },
-    // If you are interested in WalletConnect v2 provider
-    // refer to https://github.com/TxnLab/use-wallet for detailed integration instructions
   ]
 }
 
@@ -31,18 +29,11 @@ export default function App() {
 
   const walletManager = new WalletManager({
     wallets: supportedWallets,
-    defaultNetwork: algodConfig.network,
-    networks: {
-      [algodConfig.network]: {
-        algod: {
-          baseServer: algodConfig.server,
-          port: algodConfig.port,
-          token: String(algodConfig.token),
-        },
-      },
-    },
-    options: {
-      resetNetwork: true,
+    network: algodConfig.network as NetworkId,
+    algod: {
+      baseServer: algodConfig.server,
+      port: String(algodConfig.port),
+      token: String(algodConfig.token),
     },
   })
 

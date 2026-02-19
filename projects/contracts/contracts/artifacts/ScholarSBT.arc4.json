@@ -1,0 +1,61 @@
+{
+  "name": "ScholarSBT",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "createMilestone",
+      "desc": "Create a new milestone (Admin only).",
+      "args": [
+        {
+          "name": "name",
+          "type": "string",
+          "desc": "Name of the milestone (e.g., \"Lakshya Batch 90%\")"
+        },
+        {
+          "name": "uri",
+          "type": "string",
+          "desc": "Metadata URI (e.g., IPFS link to image/json)"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "claimScholarSBT",
+      "desc": "Student claims a specific milestone badge.",
+      "args": [
+        {
+          "name": "milestoneId",
+          "type": "uint64",
+          "desc": "The ID of the milestone to claim."
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "getScholarBadges",
+      "desc": "Read-only method to fetch student's earned SBTs.",
+      "args": [
+        {
+          "name": "student",
+          "type": "address",
+          "desc": "The address of the student to look up."
+        }
+      ],
+      "returns": {
+        "type": "uint64[16]",
+        "desc": "The list of milestone IDs earned by the student."
+      }
+    }
+  ]
+}

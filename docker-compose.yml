@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./projects/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      # These are baked in at build time by Vite (VITE_ prefix)
+      # For runtime env injection, see .env.example
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
