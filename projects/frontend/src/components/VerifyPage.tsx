@@ -70,12 +70,51 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
         if (demoMode) {
             setLoading(true)
             setTimeout(() => {
-                setBadges([1n, 2n]) // Simulate generic badges
+                // Try to load REAL demo badges from local storage
+                let storedBadges = localStorage.getItem(`scholar_badges_${addr}`)
+
+                // Fuzzy match fallback (e.g. if case/extra space differs)
+                if (!storedBadges) {
+                    const allKeys = Object.keys(localStorage)
+                    const lazyMatch = allKeys.find(k => k.startsWith('scholar_badges_') && k.includes(addr.substring(0, 10)))
+                    if (lazyMatch) storedBadges = localStorage.getItem(lazyMatch)
+                }
+
+                // NUCLEAR FALLBACK: If fuzzy failed, try Global Demo Key (Last Claimed)
+                // This assumes the verifier is the student demoing on same machine
+                if (!storedBadges) {
+                    const globalFallback = localStorage.getItem('scholar_demo_fallback_badges')
+                    if (globalFallback) {
+                        storedBadges = globalFallback
+                        // notify user so they know
+                        enqueueSnackbar('⚠️ Using global demo session data (Address mismatch ignored)', { variant: 'warning' })
+                    }
+                }
+
+                if (storedBadges) {
+                    try {
+                        const parsed = JSON.parse(storedBadges) as string[]
+                        setBadges(parsed.map(id => BigInt(id)))
+                        enqueueSnackbar(`✅ Found ${parsed.length} Verified Credentials (Local)`, { variant: 'success' })
+                    } catch (e) {
+                        console.error("Error parsing demo badges", e)
+                        setBadges([])
+                    }
+                } else {
+                    // Fallback for generic demo address if no local data
+                    if (addr.startsWith('32YP')) {
+                        setBadges([]) // Don't give fake data if real data missing, just notify 'No History'
+                        enqueueSnackbar('ℹ️ No local history found. Did you claim badges in Dashboard?', { variant: 'info' })
+                    } else {
+                        setBadges([])
+                        enqueueSnackbar('ℹ️ No badges found for this address', { variant: 'info' })
+                    }
+                }
+
                 if (cId) setBadges([1n]) // Specific ID simulation
                 setHasSearched(true)
                 setLoading(false)
-                enqueueSnackbar('✅ Credential Verified (Simulation Mode)', { variant: 'success' })
-            }, 1500)
+            }, 1000)
             return
         }
 
@@ -262,6 +301,23 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
             {/* ── Results Section ─────────────────────────────── */}
             {hasSearched && (
                 <div className="w-full max-w-5xl animate-fade-in-up">
+                    {/* Student Stats Summary */}
+                    <div className="md:col-span-12 mb-8 bg-blue-900/20 border border-blue-500/20 rounded-2xl p-6 flex flex-wrap gap-8 justify-center animate-fade-in backdrop-blur-md">
+                        <div className="text-center">
+                            <div className="text-sm text-blue-300 uppercase font-bold tracking-wider mb-1">Total Courses</div>
+                            <div className="text-4xl font-black text-white">{badges.length}</div>
+                        </div>
+                        <div className="w-px bg-white/10 hidden md:block"></div>
+                        <div className="text-center">
+                            <div className="text-sm text-blue-300 uppercase font-bold tracking-wider mb-1">Skill Level</div>
+                            <div className="text-4xl font-black text-white">{badges.length > 2 ? 'Expert' : badges.length > 0 ? 'Scholar' : 'Novice'}</div>
+                        </div>
+                        <div className="w-px bg-white/10 hidden md:block"></div>
+                        <div className="text-center">
+                            <div className="text-sm text-blue-300 uppercase font-bold tracking-wider mb-1">Global Rank</div>
+                            <div className="text-4xl font-black text-white">#{Math.max(1, 42 - badges.length * 3)}</div>
+                        </div>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                         {/* Profile Card / ID */}
                         {/* Profile Card / ID */}

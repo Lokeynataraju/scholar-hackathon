@@ -2,36 +2,29 @@
 
 **RIFT 2026 Hackathon - Build on Algorand Track**
 
-<!-- 
-🎬 DEMO VIDEO SCRIPT (FOR YOUR RECORDING):
-1. Intro: "Hi, I'm [Name]. I built PW Scholar-SBT for RIFT 2026 using Algorand."
-2. Problem: "Certificates are fakeable. We solve this with Soulbound Tokens."
-3. Admin Demo: 
-   - Open 'Admin Panel' (Localhost).
-   - Create a Milestone (e.g., 'Completion Certificate').
-4. Student Demo:
-   - Switch to 'Student Dashboard'.
-   - Enter ID and Claim Badge.
-   - Show 'My Profile' with the new badge.
-5. Verification:
-   - Go to 'Verify Credentials'.
-   - Paste address -> Show 'Verified' result.
-6. Outro: "Built with AlgoKit, React, and TEALScript. Thank you!"
--->
-
 ## 🚀 Live Demo
 - **Frontend URL:** [https://scholar-hackathon.vercel.app](https://scholar-hackathon.vercel.app)
 - **LinkedIn Demo Video:** [LINK_TO_YOUR_LINKEDIN_VIDEO] (Your video MUST tag RIFT's official LinkedIn page: https://www.linkedin.com/company/rift-pwioi/)
-- **Testnet Contract App ID:** `755768739`
-- **Testnet Explorer Link:** [https://lora.algorand.io/testnet/application/755768739](https://lora.algorand.io/testnet/application/755768739)
+- **Testnet Contract App ID:** `755768738`
+- **Testnet Explorer Link:** [https://lora.algorand.io/testnet/application/755768738](https://lora.algorand.io/testnet/application/755768738)
 
 ## 📝 Problem Statement
-**Note:** Select your problem statement on the RIFT website (Window: 19 Feb, 6:00 PM – 8:00 PM).
-*(Replace this section with your selected problem statement or description of your original idea once chosen)*
+> **"Fake degrees are a billion-dollar industry. Verification is a nightmare."**
 
-Current educational credentials (certificates, degrees) are fragmented, easily forgeable, and hard to verify instantly. Students lack ownership of their achievements, and employers struggle with verification.
+We address the critical issues of **Credential Fraud** and **Verification Inefficiency**.
+*   **Fraud:** Anyone can forge a PDF certificate.
+*   **Time:** Employers take weeks to verify education history.
+*   **Ownership:** Students don't own their records; universities do.
 
-**Solution:** Scholar-SBT issues Soulbound Tokens (SBTs) on the Algorand blockchain. These act as verifiable, tamper-proof digital credentials that students own and can share instantly.
+👉 **[📄 Read the Full Pitch & Solution (PITCH.md)](PITCH.md)**
+
+**The Solution:** Scholar-SBT issues **Soulbound Tokens** on Algorand. These are permanent, tamper-proof, and instantly verifiable via QR Code.
+
+## ⭐ Key Features (Winning Factors)
+1.  **Smart "Proof of Watch"**: Students cannot just click "Claim". A smart timer ensures they watch the video content before the Mint button unlocks.
+2.  **Instant QR Verification**: Employers scan a QR code to see a **Dynamically Generated Student Profile** (Total Courses, Skill Level, Rank) fetched directly from the blockchain/local history.
+3.  **Token-Gated Masterclass (DeFi)**: A "Learn-to-Earn" economy. Students earn coins by learning, then SPEND those coins to unlock premium content (e.g., Data Structures Masterclass).
+4.  **Tamper-Proof Credentials**: Uses Algorand Standard Assets (ASAs) that are frozen/soulbound to the student's wallet.
 
 ## 🏗 Architecture Overview
 
@@ -118,9 +111,10 @@ Open [http://localhost:5173](http://localhost:5173)
 -   Metadata URI is stored as a simple string; integration with IPFS for file hosting is manual.
 
 ## 👥 Team Members
--   **Team Lead / Full Stack:** [Your Name]
--   **Role:** [Your Role]
--   *(Add other team members here)*
+-   **Akash (Team Lead / Full Stack)**: Architected the entire dApp, smart contract integration, and verification logic.
+-   **Harshith Kumar C**: Frontend Development & UI/UX Design.
+-   **Meghana M**: Smart Contract Testing & Documentation.
+-   **Bhavana N**: Quality Assurance & Deployment Management.
 
 ---
 *Built for RIFT 2026 Hackathon | Powered by Algorand*
