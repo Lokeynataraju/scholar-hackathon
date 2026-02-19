@@ -140,15 +140,20 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
 
     // ── Proof of Watch Logic ──────────────────────────────────────────────
     useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+
         if (openVideo) {
             const course = COURSES.find(c => c.youtubeId === openVideo)
             if (course && !watchedModules.includes(course.id)) {
-                const timer = setTimeout(() => {
+                timer = setTimeout(() => {
                     setWatchedModules(prev => [...prev, course.id])
                     enqueueSnackbar(`✅ Module "${course.title}" Completed! Reward Unlocked.`, { variant: 'success' })
                 }, 5000) // 5s demo timer
-                return () => clearTimeout(timer)
             }
+        }
+
+        return () => {
+            if (timer) clearTimeout(timer)
         }
     }, [openVideo, watchedModules, enqueueSnackbar])
 
