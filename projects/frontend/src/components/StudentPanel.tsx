@@ -111,17 +111,23 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
 
         const storedUnlocked = localStorage.getItem(`scholar_unlocked_${activeAddress}`)
         if (storedUnlocked) setUnlockedCourses(JSON.parse(storedUnlocked))
-
     }, [activeAddress, demoMode, view])
 
-    // ── Persistence: Watched Modules ──────────────────────────────────────
+    // Load watched modules from localStorage
     useEffect(() => {
-        const key = `scholar_watched_${activeAddress}`
-        const saved = localStorage.getItem(key)
-        if (saved) {
+        const savedWatched = localStorage.getItem(`scholar_watched_${activeAddress}`)
+        if (savedWatched) {
             try {
-                setWatchedModules(JSON.parse(saved))
-            } catch (e) { console.warn('Failed to load watched status', e) }
+                const parsed = JSON.parse(savedWatched)
+                if (Array.isArray(parsed)) {
+                    setWatchedModules(parsed)
+                } else {
+                    setWatchedModules([]) // Reset if data is corrupted
+                }
+            } catch (e) {
+                console.error("Error loading watched modules", e)
+                setWatchedModules([])
+            }
         }
     }, [activeAddress])
 
