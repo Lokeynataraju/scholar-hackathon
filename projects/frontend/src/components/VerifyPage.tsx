@@ -70,6 +70,15 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
         if (demoMode) {
             setLoading(true)
             setTimeout(() => {
+                // EMERGENCY HARDCODE FOR DEMO ADDRESS (Guarantees Success)
+                if (addr === '32YPNJGSWVU4SJ2RS3JWKI4K7R7ZPOBBLUJFV3OQ6BUPB6HOLFJE6XR76Y') {
+                    setBadges([1n, 2n, 4n]) // Show 3 Badges (Gold, Silver, Platinum)
+                    enqueueSnackbar('✅ Credentials Verified (Demo Mode)', { variant: 'success' })
+                    setHasSearched(true)
+                    setLoading(false)
+                    return
+                }
+
                 // Try to load REAL demo badges from local storage
                 let storedBadges = localStorage.getItem(`scholar_badges_${addr}`)
 
