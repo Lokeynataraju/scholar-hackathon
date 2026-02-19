@@ -2,7 +2,9 @@
 
 **RIFT 2026 Hackathon - Build on Algorand Track**
 
-## 🚀 Live Demo
+## 🚀 Live Demo & Links
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FLokeynataraju%2Fscholar-sbt)
+
 - **Frontend URL:** [https://scholar-hackathon.vercel.app](https://scholar-hackathon.vercel.app)
 - **LinkedIn Demo Video:** [LINK_TO_YOUR_LINKEDIN_VIDEO] (Your video MUST tag RIFT's official LinkedIn page: https://www.linkedin.com/company/rift-pwioi/)
 - **Testnet Contract App ID:** `755768738`
@@ -63,7 +65,7 @@ The system consists of three main components:
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/scholar-sbt.git
+git clone https://github.com/Lokeynataraju/scholar-sbt.git
 cd scholar-sbt
 ```
 
@@ -110,11 +112,21 @@ Open [http://localhost:5173](http://localhost:5173)
 -   Currently, anyone can claim an SBT if they know the ID (in a real-world scenario, we would add an allowlist or admin-signature check for claiming).
 -   Metadata URI is stored as a simple string; integration with IPFS for file hosting is manual.
 
-## 👥 Team Members
--   **Akash (Team Lead / Full Stack)**: Architected the entire dApp, smart contract integration, and verification logic.
--   **Harshith Kumar C**: Frontend Development & UI/UX Design.
--   **Meghana M**: Smart Contract Testing & Documentation.
--   **Bhavana N**: Quality Assurance & Deployment Management.
+## 👥 Team Members (The Builders)
+We built this together with equal passion and distinct expertise:
+
+1.  **Akash (Full Stack Lead)**  
+    *   Designed the **System Architecture** and **Smart Contract Logic** (TEALScript).
+    *   Managed the end-to-end integration of Blockchain with the Frontend.
+2.  **Harshith Kumar C (Frontend Engineer)**  
+    *   Built the entire **Interactive UI/UX** using React & Tailwind.
+    *   Implemented the **Gamification Logic** (Points, Leaderboard, Wallet Connection).
+3.  **Meghana M (Blockchain Developer)**  
+    *   Optimized the **Algorand Asset Structure** (ASAs) and box storage retrieval.
+    *   Handled **Smart Contract Verification Scenarios** and security checks.
+4.  **Bhavana N (Product & Deployment)**  
+    *   Defined the **User Journey** and **Real-World Use Cases** (Zero-Knowledge verification).
+    *   Managed the **Vercel Deployment Pipeline** and Quality Assurance testing.
 
 ---
 *Built for RIFT 2026 Hackathon | Powered by Algorand*
