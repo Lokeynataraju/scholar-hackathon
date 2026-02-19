@@ -21,6 +21,7 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
     { id: WalletId.DEFLY },
     { id: WalletId.PERA },
     { id: WalletId.EXODUS },
+    { id: WalletId.MNEMONIC }, // Developer wallet – paste mnemonic to sign on testnet
   ]
 }
 
