@@ -24,28 +24,35 @@ const Home: React.FC<HomeProps> = () => {
 
   useEffect(() => {
     const initClient = async () => {
-      const algodConfig = getAlgodConfigFromViteEnvironment()
-      const algorand = AlgorandClient.fromConfig({ algodConfig })
-
-      if (activeAddress && transactionSigner) {
-        algorand.setSigner(activeAddress, transactionSigner)
-      }
-
-      const client = new ScholarSbtClient({
-        algorand,
-        appId: BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID),
-      })
-
-      setAppClient(client)
-
-      // Fetch admin address
       try {
-        const state = await client.state.global.getAll()
-        if (state.admin) {
-          setAdminAddress(state.admin)
+        const algodConfig = getAlgodConfigFromViteEnvironment()
+        const algorand = AlgorandClient.fromConfig({ algodConfig })
+
+        if (activeAddress && transactionSigner) {
+          algorand.setSigner(activeAddress, transactionSigner)
+        }
+
+        // Fallback to deployed testnet App ID if env var not set
+        const appId = BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID ?? '755768739')
+
+        const client = new ScholarSbtClient({
+          algorand,
+          appId,
+        })
+
+        setAppClient(client)
+
+        // Fetch admin address
+        try {
+          const state = await client.state.global.getAll()
+          if (state.admin) {
+            setAdminAddress(state.admin)
+          }
+        } catch (e) {
+          console.error('Error fetching global state:', e)
         }
       } catch (e) {
-        console.error('Error fetching global state:', e)
+        console.error('Error initializing client:', e)
       }
     }
 
