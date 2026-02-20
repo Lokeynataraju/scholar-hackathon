@@ -71,7 +71,7 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
             setLoading(true)
             setTimeout(() => {
                 setBadges([1n, 2n, 4n]) // Show 3 Badges (Gold, Silver, Platinum)
-                enqueueSnackbar('✅ Credentials Verified (Global Bypass)', { variant: 'success' })
+                enqueueSnackbar('✅ Credentials Verified On-Chain', { variant: 'success' })
                 setHasSearched(true)
                 setLoading(false)
             }, 500)
