@@ -44,8 +44,12 @@ const VerifyPage: React.FC<VerifyPageProps> = ({ activeAddress }) => {
     const [demoMode, setDemoMode] = useState(false)
 
     useEffect(() => {
-        const isDemo = localStorage.getItem('scholar_demo_mode') === 'true'
-        setDemoMode(isDemo)
+        let isDemo = localStorage.getItem('scholar_demo_mode')
+        if (isDemo === null) {
+            localStorage.setItem('scholar_demo_mode', 'true')
+            isDemo = 'true'
+        }
+        setDemoMode(isDemo === 'true')
 
         const autoAddr = sessionStorage.getItem('verify_address')
         if (autoAddr) {

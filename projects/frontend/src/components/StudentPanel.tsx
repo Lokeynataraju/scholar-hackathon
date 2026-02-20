@@ -69,11 +69,11 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
     const [coins, setCoins] = useState(0)
     const [streak, setStreak] = useState(0)
 
-    // Demo Mode State (Forced True Logic)
+    // Demo Mode State (Primary demo toggle)
     const [demoMode] = useState(() => {
-        const saved = localStorage.getItem('scholar_demo_mode_v2')
+        const saved = localStorage.getItem('scholar_demo_mode')
         if (saved === null) {
-            localStorage.setItem('scholar_demo_mode_v2', 'true')
+            localStorage.setItem('scholar_demo_mode', 'true')
             return true
         }
         return saved === 'true'
