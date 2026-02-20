@@ -356,6 +356,7 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
                                             <IconPlay /> Watch Module
                                         </button>
 
+                                        {/* 1. Unlock Button (Is Locked) */}
                                         {(course as any).price && !unlockedCourses.includes(course.id) && (
                                             <button
                                                 onClick={() => handleUnlock(course.id, (course as any).price)}
@@ -365,7 +366,15 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
                                             </button>
                                         )}
 
-                                        {!hasBadge && !((course as any).price && !unlockedCourses.includes(course.id)) ? (
+                                        {/* 2. Claimed Badge (Has Badge) */}
+                                        {hasBadge && (
+                                            <div className="btn bg-green-500/10 border-green-500/50 text-green-400 rounded-xl px-6 no-animation cursor-default">
+                                                <IconCheck /> Claimed
+                                            </div>
+                                        )}
+
+                                        {/* 3. Watch/Claim Button (Not Locked & Not Claimed) */}
+                                        {!hasBadge && !((course as any).price && !unlockedCourses.includes(course.id)) && (
                                             <button
                                                 onClick={() => handleClaim(course.id)}
                                                 disabled={claiming === course.id || !watchedModules.includes(course.id)}
@@ -373,10 +382,6 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
                                             >
                                                 {claiming === course.id ? 'Minting...' : watchedModules.includes(course.id) ? 'Claim Certificate' : 'Watch to Unlock'}
                                             </button>
-                                        ) : (
-                                            <div className="btn bg-green-500/10 border-green-500/50 text-green-400 rounded-xl px-6 no-animation cursor-default">
-                                                <IconCheck /> Claimed
-                                            </div>
                                         )}
                                     </div>
                                 </div>
