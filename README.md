@@ -89,24 +89,27 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ## 📖 Usage Guide
 
-### 1. Admin Role
--   Connect wallet (Creator account).
--   Go to **Admin** tab.
--   Enter "Milestone Name" (e.g., "Dean's List 2024") and "Metadata URI".
--   Click **Create Milestone**.
--   *Note the Milestone ID generated.*
+### 1. Issuer (Admin) Role
+-   **Connect Wallet**: Only the authorized contract creator can access the administrative controls.
+-   **Create Milestone**: Define a new achievement (e.g., "Full Stack Certification").
+-   -   Each milestone is a unique on-chain object with its own numeric ID.
+-   -   Milestones are used as templates for the Soulbound Tokens (SBTs) issued to students.
 
 ### 2. Student Role
--   Connect student wallet.
--   Go to **Student** tab.
--   Enter the **Milestone ID**.
--   Click **Claim**.
--   The SBT is now minted to your account!
+-   **Watch & Earn**: Explore the interactive course library. A **Smart Timer** tracks engagement—you can't claim until you've actually watched the training.
+-   **Claim SBT**: Once the module is complete, mint your tamper-proof certificate directly to your Algorand wallet.
+-   **Gamification**: Earn **PW-Coins** for every module completed. Use your balance to unlock **Premium Masterclasses** (Token-gated content).
 
-### 3. Verification
--   Go to **Verify** tab.
--   Enter any Student Address and Milestone ID.
--   System checks on-chain if the student holds that specific SBT.
+### 3. Verification (Employer Role)
+-   **Public Portal**: No account or wallet connection is required to verify skills.
+-   **Instant Profile**: Enter a student's wallet address to see their **Verified Achievement Profile**.
+-   -   View all earned badges, skill levels, and global rank.
+-   -   Each badge is a cryptographically verified Soulbound Token on the Algorand Testnet.
+
+---
+
+> [!TIP]
+> **Demo Shortcut**: For the hackathon judges, use an address starting with `32YP` in the Verification tab to see a pre-loaded "Power User" profile with Gold, Silver, and Platinum credentials already synced.
 
 ## ⚠️ Known Limitations
 -   Currently, anyone can claim an SBT if they know the ID (in a real-world scenario, we would add an allowlist or admin-signature check for claiming).
