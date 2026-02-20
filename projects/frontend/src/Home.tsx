@@ -60,7 +60,7 @@ const Home: React.FC<HomeProps> = () => {
         const algorand = AlgorandClient.fromConfig({ algodConfig })
 
         // Use Testnet App ID
-        const appId = BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID ?? '755768739')
+        const appId = BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID ?? '755768738')
 
         const client = new ScholarSbtClient({
           algorand,
@@ -82,7 +82,7 @@ const Home: React.FC<HomeProps> = () => {
         // Fallback dummy client so UI renders even if network fails
         const algodConfig = getAlgodConfigFromViteEnvironment()
         const algorand = AlgorandClient.fromConfig({ algodConfig })
-        const appId = BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID ?? '755768739')
+        const appId = BigInt(import.meta.env.VITE_SCHOLAR_SBT_APP_ID ?? '755768738')
         setAppClient(new ScholarSbtClient({ algorand, appId }))
       }
     }

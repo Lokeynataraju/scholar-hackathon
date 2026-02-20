@@ -472,7 +472,7 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
                         </div>
                         <div className="mt-4 p-4 bg-black/30 rounded-xl border border-white/5">
                             <div className="text-xs text-slate-500 uppercase font-bold mb-1">Contract Address</div>
-                            <div className="font-mono text-slate-300 break-all text-sm">{import.meta.env.VITE_SCHOLAR_SBT_APP_ID || '755768739'}</div>
+                            <div className="font-mono text-slate-300 break-all text-sm">{import.meta.env.VITE_SCHOLAR_SBT_APP_ID || '755768738'}</div>
                         </div>
                     </div>
 
