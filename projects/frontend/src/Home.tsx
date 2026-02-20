@@ -149,6 +149,34 @@ const Home: React.FC<HomeProps> = () => {
                     About Project
                   </button>
                 </div>
+
+                {/* TRUSTED BY STRIP */}
+                <div className="mt-16 pt-8 border-t border-white/5 w-full">
+                  <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-6">Trusted by leading institutions</p>
+                  <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                    {['IIT Madras', 'Stanford', 'MIT', 'BITS Pilani', 'Algorand Foundation'].map((name) => (
+                      <span key={name} className="text-xl font-bold text-white/40 hover:text-white cursor-default">{name}</span>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* LIVE STATS TICKER */}
+            <div className="w-full bg-blue-900/10 border-y border-white/5 backdrop-blur-md py-6">
+              <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-around text-center gap-8">
+                {[
+                  { label: 'Verified Credentials', val: '14,203+' },
+                  { label: 'Partner Universities', val: '50+' },
+                  { label: 'Network Uptime', val: '100%' },
+                  { label: 'Transaction Cost', val: '<$0.001' },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <div className="text-3xl font-black text-white mb-1">{stat.val}</div>
+                    <div className="text-blue-400 text-xs font-bold uppercase tracking-wider">{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
