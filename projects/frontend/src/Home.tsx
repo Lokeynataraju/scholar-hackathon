@@ -102,110 +102,116 @@ const Home: React.FC<HomeProps> = () => {
           {/* Navbar for Landing */}
           <div className="navbar fixed top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/5 px-6 sm:px-12 h-20">
             <div className="flex-1">
-              <a className="btn btn-ghost normal-case text-2xl font-black gap-2 hover:bg-transparent">
+              <div className="btn btn-ghost normal-case text-2xl font-black gap-2 hover:bg-transparent">
                 <span className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-400">🎓</span>
                 <span>Scholar<span className="text-blue-500">SBT</span></span>
-              </a>
+              </div>
             </div>
             <div className="flex-none">
               <button onClick={openModal} className="btn bg-blue-600 hover:bg-blue-500 text-white border-0 rounded-full px-8 font-bold shadow-lg shadow-blue-900/40 hover:shadow-blue-500/20 transition-all">
-                Connect Wallet
+                {activeTab === 'verify' ? 'Sign In to My Dashboard' : 'Connect Wallet'}
               </button>
             </div>
           </div>
 
-          {/* Hero Section */}
-          <div className="pt-32 pb-20 px-4">
-            <div className="max-w-7xl mx-auto relative rounded-[3rem] overflow-hidden bg-slate-800/50 border border-white/5 shadow-2xl min-h-[75vh] flex items-center justify-center text-center px-4">
-              {/* Background Effects */}
-              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 mix-blend-overlay"></div>
-              <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
-              <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] mix-blend-screen animate-pulse"></div>
+          {activeTab === 'verify' ? (
+            <div className="pt-24 min-h-screen">
+              <VerifyPage />
+            </div>
+          ) : (
+            <>
+              {/* Hero Section */}
+              <div className="pt-32 pb-20 px-4">
+                <div className="max-w-7xl mx-auto relative rounded-[3rem] overflow-hidden bg-slate-800/50 border border-white/5 shadow-2xl min-h-[75vh] flex items-center justify-center text-center px-4">
+                  {/* Background Effects */}
+                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 mix-blend-overlay"></div>
+                  <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+                  <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] mix-blend-screen animate-pulse"></div>
 
-              <div className="relative z-10 max-w-4xl mx-auto py-20 flex flex-col items-center">
-                <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/5 text-blue-300 text-xs font-bold uppercase tracking-widest border border-white/10 backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Live on Algorand Testnet
-                </div>
+                  <div className="relative z-10 max-w-4xl mx-auto py-20 flex flex-col items-center">
+                    <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/5 text-blue-300 text-xs font-bold uppercase tracking-widest border border-white/10 backdrop-blur-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      Live on Algorand Testnet
+                    </div>
 
-                <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1] mb-8">
-                  Fake Certificates End <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Right Here.</span>
-                </h1>
+                    <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1] mb-8">
+                      Fake Certificates End <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Right Here.</span>
+                    </h1>
 
-                <p className="text-xl text-slate-300 max-w-2xl leading-relaxed mb-12">
-                  The world's first <span className="text-white font-semibold">Soulbound Token (SBT)</span> platform for academic credentials.
-                  Tamper-proof, instantly verifiable, and 100% owned by you.
-                </p>
+                    <p className="text-xl text-slate-300 max-w-2xl leading-relaxed mb-12">
+                      The world's first <span className="text-white font-semibold">Soulbound Token (SBT)</span> platform for academic credentials.
+                      Tamper-proof, instantly verifiable, and 100% owned by you.
+                    </p>
 
-                <div className="flex gap-4">
-                  <button onClick={openModal} className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white border-0 rounded-2xl px-12 font-bold shadow-xl shadow-blue-900/50 hover:scale-105 transition-all">
-                    Get Started for Free
-                  </button>
-                  <button
-                    onClick={() => document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="btn btn-lg btn-ghost border border-white/10 text-white hover:bg-white/5 rounded-2xl px-8"
-                  >
-                    About Project
-                  </button>
-                </div>
+                    <div className="flex gap-4">
+                      <button onClick={openModal} className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white border-0 rounded-2xl px-12 font-bold shadow-xl shadow-blue-900/50 hover:scale-105 transition-all">
+                        Get Started for Free
+                      </button>
+                      <button
+                        onClick={() => document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="btn btn-lg btn-ghost border border-white/10 text-white hover:bg-white/5 rounded-2xl px-8"
+                      >
+                        About Project
+                      </button>
+                    </div>
 
-                {/* TRUSTED BY STRIP */}
-                <div className="mt-16 pt-8 border-t border-white/5 w-full">
-                  <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-6">Trusted by leading institutions</p>
-                  <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                    {['IIT Madras', 'Stanford', 'MIT', 'BITS Pilani', 'Algorand Foundation'].map((name) => (
-                      <span key={name} className="text-xl font-bold text-white/40 hover:text-white cursor-default">{name}</span>
-                    ))}
+                    {/* TRUSTED BY STRIP */}
+                    <div className="mt-16 pt-8 border-t border-white/5 w-full">
+                      <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-6">Trusted by leading institutions</p>
+                      <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                        {['IIT Madras', 'Stanford', 'MIT', 'BITS Pilani', 'Algorand Foundation'].map((name) => (
+                          <span key={name} className="text-xl font-bold text-white/40 hover:text-white cursor-default">{name}</span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-              </div>
-            </div>
-
-            {/* LIVE STATS TICKER */}
-            <div className="w-full bg-blue-900/10 border-y border-white/5 backdrop-blur-md py-6">
-              <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-around text-center gap-8">
-                {[
-                  { label: 'Verified Credentials', val: '14,203+' },
-                  { label: 'Partner Universities', val: '50+' },
-                  { label: 'Network Uptime', val: '100%' },
-                  { label: 'Transaction Cost', val: '<$0.001' },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <div className="text-3xl font-black text-white mb-1">{stat.val}</div>
-                    <div className="text-blue-400 text-xs font-bold uppercase tracking-wider">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ── ABOUT SECTION (New) ─────────────────────────── */}
-            <div id="about-section" className="max-w-5xl mx-auto py-32 px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-black text-white mb-6">Why ScholarSBT?</h2>
-                <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                  Traditional paper certificates are easily forged and hard to verify.
-                  We use the <strong>Algorand Blockchain</strong> to create immutable, permanent proof of your achievements.
-                </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  { icon: '🔒', title: 'Tamper Proof', desc: 'Once minted, your credential lives on the blockchain forever. No one can delete or fake it.' },
-                  { icon: '⚡', title: 'Instant Verify', desc: 'Employers can verify your skills in milliseconds using just your wallet address.' },
-                  { icon: '🌍', title: 'Global Access', desc: 'Your academic history travels with you anywhere in the world, owned 100% by you.' }
-                ].map((item, i) => (
-                  <div key={i} className="bg-slate-800/30 p-8 rounded-3xl border border-white/5 hover:bg-slate-800/50 transition-colors">
-                    <div className="text-4xl mb-4">{item.icon}</div>
-                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
+              {/* LIVE STATS TICKER */}
+              <div className="w-full bg-blue-900/10 border-y border-white/5 backdrop-blur-md py-6">
+                <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-around text-center gap-8">
+                  {[
+                    { label: 'Verified Credentials', val: '14,203+' },
+                    { label: 'Partner Universities', val: '50+' },
+                    { label: 'Network Uptime', val: '100%' },
+                    { label: 'Transaction Cost', val: '<$0.001' },
+                  ].map((stat) => (
+                    <div key={stat.label}>
+                      <div className="text-3xl font-black text-white mb-1">{stat.val}</div>
+                      <div className="text-blue-400 text-xs font-bold uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-          </div>
+              {/* ABOUT SECTION */}
+              <div id="about-section" className="max-w-5xl mx-auto py-32 px-4">
+                <div className="text-center mb-16">
+                  <h2 className="text-3xl md:text-5xl font-black text-white mb-6">Why ScholarSBT?</h2>
+                  <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Traditional paper certificates are easily forged and hard to verify.
+                    We use the <strong>Algorand Blockchain</strong> to create immutable, permanent proof of your achievements.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-8">
+                  {[
+                    { icon: '🔒', title: 'Tamper Proof', desc: 'Once minted, your credential lives on the blockchain forever. No one can delete or fake it.' },
+                    { icon: '⚡', title: 'Instant Verify', desc: 'Employers can verify your skills in milliseconds using just your wallet address.' },
+                    { icon: '🌍', title: 'Global Access', desc: 'Your academic history travels with you anywhere in the world, owned 100% by you.' }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-slate-800/30 p-8 rounded-3xl border border-white/5 hover:bg-slate-800/50 transition-colors">
+                      <div className="text-4xl mb-4">{item.icon}</div>
+                      <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       ) : (
         // ── DASHBOARD LAYOUT (Connected State) ───────────────────────────
@@ -221,7 +227,7 @@ const Home: React.FC<HomeProps> = () => {
             <div className="print:hidden">
               <DashboardHeader
                 title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-                activeAddress={activeAddress}
+                activeAddress={activeAddress || null}
                 openWalletModal={openModal}
               />
             </div>
@@ -243,17 +249,17 @@ const Home: React.FC<HomeProps> = () => {
                   {['dashboard', 'watch', 'leaderboard', 'settings'].includes(activeTab) && (
                     <StudentPanel
                       appClient={appClient}
-                      activeAddress={activeAddress}
+                      activeAddress={activeAddress || ''}
                       view={activeTab}
                     />
                   )}
 
                   {activeTab === 'verify' && (
-                    <VerifyPage activeAddress={activeAddress} />
+                    <VerifyPage activeAddress={activeAddress || undefined} />
                   )}
 
                   {activeTab === 'admin' && (
-                    <AdminPanel appClient={appClient} adminAddress={adminAddress} activeAddress={activeAddress} />
+                    <AdminPanel appClient={appClient} adminAddress={adminAddress} activeAddress={activeAddress || ''} />
                   )}
                 </div>
               )}
