@@ -142,12 +142,41 @@ const Home: React.FC<HomeProps> = () => {
                   <button onClick={openModal} className="btn btn-lg bg-blue-600 hover:bg-blue-500 text-white border-0 rounded-2xl px-12 font-bold shadow-xl shadow-blue-900/50 hover:scale-105 transition-all">
                     Get Started for Free
                   </button>
-                  <button className="btn btn-lg btn-ghost border border-white/10 text-white hover:bg-white/5 rounded-2xl px-8">
-                    Learn More
+                  <button
+                    onClick={() => document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="btn btn-lg btn-ghost border border-white/10 text-white hover:bg-white/5 rounded-2xl px-8"
+                  >
+                    About Project
                   </button>
                 </div>
               </div>
             </div>
+
+            {/* ── ABOUT SECTION (New) ─────────────────────────── */}
+            <div id="about-section" className="max-w-5xl mx-auto py-32 px-4">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-black text-white mb-6">Why ScholarSBT?</h2>
+                <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                  Traditional paper certificates are easily forged and hard to verify.
+                  We use the <strong>Algorand Blockchain</strong> to create immutable, permanent proof of your achievements.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  { icon: '🔒', title: 'Tamper Proof', desc: 'Once minted, your credential lives on the blockchain forever. No one can delete or fake it.' },
+                  { icon: '⚡', title: 'Instant Verify', desc: 'Employers can verify your skills in milliseconds using just your wallet address.' },
+                  { icon: '🌍', title: 'Global Access', desc: 'Your academic history travels with you anywhere in the world, owned 100% by you.' }
+                ].map((item, i) => (
+                  <div key={i} className="bg-slate-800/30 p-8 rounded-3xl border border-white/5 hover:bg-slate-800/50 transition-colors">
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       ) : (

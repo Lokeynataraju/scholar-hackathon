@@ -59,17 +59,20 @@ const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
 
             {/* ── Footer ─────────────────────────────────────────────────────── */}
             <div className="p-4 border-t border-white/5">
-                <div className="bg-slate-800/50 rounded-xl p-4 border border-white/5 backdrop-blur-sm">
+                <button
+                    onClick={() => setActiveTab('settings')}
+                    className="w-full bg-slate-800/50 rounded-xl p-4 border border-white/5 backdrop-blur-sm hover:bg-slate-700/50 hover:border-blue-500/30 transition-all text-left group"
+                >
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-inner">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-inner group-hover:scale-105 transition-transform">
                             US
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-white text-sm font-bold">User</span>
-                            <span className="text-slate-500 text-xs">Student Plan</span>
+                            <span className="text-white text-sm font-bold group-hover:text-blue-200 transition-colors">User</span>
+                            <span className="text-slate-500 text-xs group-hover:text-slate-400">Student Plan</span>
                         </div>
                     </div>
-                </div>
+                </button>
             </div>
         </aside>
     )
