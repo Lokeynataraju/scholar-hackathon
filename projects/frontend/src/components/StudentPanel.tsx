@@ -70,7 +70,7 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
     const [streak, setStreak] = useState(0)
 
     // Demo Mode State (Primary demo toggle)
-    const [demoMode] = useState(() => {
+    const [demoMode, setDemoMode] = useState(() => {
         const saved = localStorage.getItem('scholar_demo_mode')
         if (saved === null) {
             localStorage.setItem('scholar_demo_mode', 'true')
@@ -78,6 +78,13 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
         }
         return saved === 'true'
     })
+
+    const toggleDemoMode = (val: boolean) => {
+        setDemoMode(val)
+        localStorage.setItem('scholar_demo_mode', String(val))
+        enqueueSnackbar(`Switched to ${val ? 'Simulation' : 'Live Blockchain'} Mode`, { variant: 'info' })
+        setTimeout(() => window.location.reload(), 1000) // Reload to sync all components
+    }
 
     const { enqueueSnackbar } = useSnackbar()
 
@@ -466,18 +473,28 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ appClient, activeAddress, v
                 <h2 className="text-3xl font-black text-white">Settings</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Blockchain Network */}
+                    {/* Blockchain Network & Demo Mode */}
                     <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl">
-                        <h3 className="text-xl font-bold text-white mb-4">Blockchain Network</h3>
-                        <div className="form-control">
-                            <label className="label cursor-pointer justify-start gap-4">
-                                <input type="radio" name="net" className="radio radio-primary" checked readOnly />
-                                <span className="label-text text-white">Algorand Testnet (Active)</span>
-                            </label>
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-xl font-bold text-white">Execution Mode</h3>
+                            <input
+                                type="checkbox"
+                                className="toggle toggle-primary"
+                                checked={demoMode}
+                                onChange={(e) => toggleDemoMode(e.target.checked)}
+                            />
                         </div>
-                        <div className="mt-4 p-4 bg-black/30 rounded-xl border border-white/5">
-                            <div className="text-xs text-slate-500 uppercase font-bold mb-1">Contract Address</div>
-                            <div className="font-mono text-slate-300 break-all text-sm">{import.meta.env.VITE_SCHOLAR_SBT_APP_ID || '755768738'}</div>
+
+                        <div className="space-y-4">
+                            <div className={`p-4 rounded-xl border transition-colors ${demoMode ? 'bg-blue-500/10 border-blue-500/30' : 'bg-green-500/10 border-green-500/30'}`}>
+                                <div className="text-white font-bold text-sm mb-1">{demoMode ? 'Simulation Mode' : 'Live Blockchain'}</div>
+                                <p className="text-xs text-slate-400">{demoMode ? 'Claims are simulated locally. No ALGO required.' : 'Interacting directly with Algorand Testnet.'}</p>
+                            </div>
+
+                            <div className="p-4 bg-black/30 rounded-xl border border-white/5">
+                                <div className="text-xs text-slate-500 uppercase font-bold mb-1">Contract Address</div>
+                                <div className="font-mono text-slate-300 break-all text-sm">{import.meta.env.VITE_SCHOLAR_SBT_APP_ID || '755768738'}</div>
+                            </div>
                         </div>
                     </div>
 
